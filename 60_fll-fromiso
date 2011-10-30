@@ -4,6 +4,7 @@
 #
 # Copyright © 2009 Joaquim Boura <x-un-i@berlios.de>
 # Copyright © 2009-2010 Stefan Lippers-Hollmann <s.l-h@gmx.de>
+# Copyright © 2011 Ferdinand Thommes <devil@siduction.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -28,7 +29,7 @@ if [ -r /etc/default/grub2-fll-fromiso ]; then
 fi
 
 FLL_GRUB2_ISO_LOCATION="${FLL_GRUB2_ISO_LOCATION:-"/srv/ISO"}"
-FLL_GRUB2_ISO_PREFIX="${FLL_GRUB2_ISO_PREFIX:-"aptosid fullstory"}"
+FLL_GRUB2_ISO_PREFIX="${FLL_GRUB2_ISO_PREFIX:-"siduction fullstory"}"
 FLL_GRUB2_LANG="${FLL_GRUB2_LANG:-"en_EN"}"
 FLL_GRUB2_TZ="${FLL_GRUB2_TZ:-"UTC"}"
 FLL_GRUB2_CHEATCODE="${FLL_GRUB2_CHEATCODE:-"quiet noeject"}"

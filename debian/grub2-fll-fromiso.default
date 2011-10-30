@@ -10,9 +10,9 @@
 # default: /srv/ISO
 #FLL_GRUB2_ISO_LOCATION="/srv/ISO"
 
-# array for defining ISO prefices --> aptosid-*.iso, non-recursive
-# default: "aptosid- fullstory-"
-#FLL_GRUB2_ISO_PREFIX="aptosid-"
+# array for defining ISO prefices --> siduction-*.iso, non-recursive
+# default: "siduction- fullstory-"
+#FLL_GRUB2_ISO_PREFIX="siduction-"
 
 # set default language
 # default: en_US

@@ -1,8 +1,16 @@
 grub2-fll-fromiso (0.2.16) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 03 Sep 2011 16:00:31 +0200
+  [ Ferdinand Thommes ]
+  * forked package for siduction
+  * removed all occurances of aptosid
+  * added .gitolite and /source/options
+  * adopted copyright
+  * fixed /debian/foo
+
+ -- Ferdinand Thommes <devil@siduction.org>  Sun, 30 Oct 2011 10:28:44 +0100
 
 grub2-fll-fromiso (0.2.15) unstable; urgency=low
 
