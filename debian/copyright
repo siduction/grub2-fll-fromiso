@@ -1,15 +1,14 @@
 This package was debianized by:
     Stefan Lippers-Hollmann <s.l-h@gmx.de> on Sun, 23 Aug 2009 16:44:22 +0200
-    This package was forked by:
-    Ferdinand Thommes <devil@siduction.org> on Sun, 30 Nov. 2011
 
-    It was downloaded from: http://aptosid.com/debian
+The original source can always be found at:
+    http://developer.berlios.de/projects/fullstory
 
-Copyright:
-    © 2009 Joaquim Boura <x-un-i@berlios.de>
-    © 2009-2010 Stefan Lippers-Hollmann <s.l-h@gmx.de>
-    © 2011 Ferdinand Thommes <devil@siduction.org>
 
+Copyright: 2011, Ferdinand Thommes <devil@siduction.org>
+           2009-2010, Stefan Lippers-Hollmann <s.l-h@gmx.de>           
+           2009, Joaquim Boura <x-un-i@berlios.de>
+    
 License:
     This package is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -1,8 +1,9 @@
 Source: grub2-fll-fromiso
 Section: admin
 Priority: extra
-XBSC-Original-Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
 Maintainer: Ferdinand Thommes <devil@siduction.org>
+Uploaders: Alf Gaida <agaida@siduction.org>
+XBSC-Original-Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
 Build-Depends: debhelper (>= 8)
 Standards-Version: 3.9.2
 Vcs-Git: git3@git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git

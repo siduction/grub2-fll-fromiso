@@ -1,4 +1,6 @@
 #!/usr/bin/make -f
 
+wxport dh_verbose=1
+
 %:
 	dh $@
