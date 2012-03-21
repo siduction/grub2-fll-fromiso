@@ -1,3 +1,5 @@
 debian/files
-debian/desktop-defaults*
 *.swp
+debian/grub2-fll-fromiso.debhelper.log
+debian/grub2-fll-fromiso.substvars
+debian/grub2-fll-fromiso/
