@@ -1,3 +1,12 @@
+grub2-fll-fromiso (0.2.19) unstable; urgency=low
+
+  * source override to prevent complaining lintian about 
+    XSBC-Original-Maintainer
+  * Vcs-Git: git3@git.--> git://git.
+  * fixes #645
+
+ -- Alf Gaida <agaida@siduction.org>  Thu, 22 Mar 2012 20:58:55 +0100
+
 grub2-fll-fromiso (0.2.18) unstable; urgency=low
 
   * bump standards to 3.9.3

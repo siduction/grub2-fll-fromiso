@@ -6,7 +6,7 @@ Uploaders: Alf Gaida <agaida@siduction.org>
 XBSC-Original-Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.3
-Vcs-Git: git3@git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git
+Vcs-Git: git://git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git
 Vcs-Browser: http://git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git
 
 Package: grub2-fll-fromiso
