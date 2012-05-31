@@ -1,3 +1,11 @@
+grub2-fll-fromiso (0.3.0) unstable; urgency=low
+
+  * sed-coding reverted, use a awk-line in entry-generation instead
+  * bump version to 0.3.0
+  * thanks to towo for help and debugging
+
+ -- Alf Gaida <agaida@siduction.org>  Thu, 31 May 2012 20:49:17 +0200
+
 grub2-fll-fromiso (0.2.20) unstable; urgency=low
 
   * # sed -n 's/.*\(vmlinuz.*\);1/\1/p' replaces sed -n 's/.*\(vmlinuz.*\)/\1/p'

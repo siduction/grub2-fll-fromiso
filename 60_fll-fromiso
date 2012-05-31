@@ -84,13 +84,13 @@ for iso_image in $FROMISO; do
 		stripped_path="/${stripped_path}"
 	fi
 
-        #  sed -n 's/.*\(vmlinuz.*\);1/\1/p' replaces sed -n 's/.*\(vmlinuz.*\)/\1/p'
-	kernels="$( ( ${ISOINFO} -J -l -i ${iso_image} 2>/dev/null || ${ISOINFO} -l -i ${iso_image} ) | tr A-Z a-z | sed -n 's/.*\(vmlinuz.*\);1/\1/p')"
+	kernels="$( ( ${ISOINFO} -J -l -i ${iso_image} 2>/dev/null || ${ISOINFO} -l -i ${iso_image} ) | tr A-Z a-z | sed -n 's/.*\(vmlinuz.*\)/\1/p')"
 	if ( ${ISOINFO} -J -l -i ${iso_image} 2> /dev/null|| ${ISOINFO} -l -i ${iso_image}) | tr A-Z a-z | grep -q initrd\\.img; then
 		initrd_suffix=".img"
 	fi
 
-	for kernel in ${kernels}; do
+        for kernel in ${kernels}; do
+                kernel=$(echo $kernel | awk -F ';' '{ print $1 }')
 		printf "menuentry \"$(basename ${iso_image} .iso) (${kernel#vmlinuz\-})\" {\n"
 		printf "\tinsmod iso9660\n"
 		prepare_boot_cache="$(prepare_grub_to_access_device ${cur_device} | sed -e "s/^/\t/")"
