@@ -1,17 +1,16 @@
 Source: grub2-fll-fromiso
 Section: admin
 Priority: extra
-Maintainer: Ferdinand Thommes <devil@siduction.org>
-Uploaders: Alf Gaida <agaida@siduction.org>
-XBSC-Original-Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
+Maintainer: Alf Gaida <agaida@siduction.org>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.3
-Vcs-Git: git://git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git
-Vcs-Browser: http://git.siduction.org:packages/siduction-repository/grub2-fll-fromiso.git
+Standards-Version: 3.9.5
+Vcs-Git: git://git.siduction.org:code/grub2-fll-fromiso.git
+Vcs-Browser: http://git.siduction.org/?p=code/grub2-fll-fromiso.git
 
 Package: grub2-fll-fromiso
 Architecture: all
-Depends: ${shlibs:Depends},
+Depends: 
+ ${shlibs:Depends},
  ${misc:Depends},
  genisoimage,
  grub-pc | grub-efi-amd64

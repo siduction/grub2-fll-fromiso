@@ -1,3 +1,12 @@
+grub2-fll-fromiso (2013.01.08) unstable; urgency=medium
+
+  * introduce me as maintainer
+  * copyright use now new format
+  * bump standards to 3.9.5 
+  * new date based numbering
+
+ -- Alf Gaida <agaida@siduction.org>  Wed, 08 Jan 2014 18:40:34 +0100
+
 grub2-fll-fromiso (0.3.0) unstable; urgency=low
 
   * sed-coding reverted, use a awk-line in entry-generation instead
