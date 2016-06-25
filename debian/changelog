@@ -1,77 +1,107 @@
-grub2-fll-fromiso (2013.09.03) unstable; urgency=medium
-
-  * merge upstream
-
- -- Alf Gaida <agaida@siduction.org>  Wed, 03 Sep 2014 23:20:12 +0200
-
-grub2-fll-fromiso (2013.01.08) unstable; urgency=medium
-
-  * introduce me as maintainer
-  * copyright use now new format
-  * bump standards to 3.9.5 
-  * new date based numbering
-
- -- Alf Gaida <agaida@siduction.org>  Wed, 08 Jan 2014 18:40:34 +0100
-
-grub2-fll-fromiso (0.3.0) unstable; urgency=low
-
-  * sed-coding reverted, use a awk-line in entry-generation instead
-  * bump version to 0.3.0
-  * thanks to towo for help and debugging
-
- -- Alf Gaida <agaida@siduction.org>  Thu, 31 May 2012 20:49:17 +0200
-
-grub2-fll-fromiso (0.2.20) unstable; urgency=low
-
-  * # sed -n 's/.*\(vmlinuz.*\);1/\1/p' replaces sed -n 's/.*\(vmlinuz.*\)/\1/p'
-    thanks to cryptoseve, refs #747
- 
- -- Alf Gaida <agaida@siduction.org>  Wed, 30 May 2012 21:04:02 +0200
-
-grub2-fll-fromiso (0.2.19) unstable; urgency=low
-
-  * source override to prevent complaining lintian about 
-    XSBC-Original-Maintainer
-  * Vcs-Git: git3@git.--> git://git.
-  * fixes #645
-
- -- Alf Gaida <agaida@siduction.org>  Thu, 22 Mar 2012 20:58:55 +0100
-
-grub2-fll-fromiso (0.2.18) unstable; urgency=low
-
-  * bump standards to 3.9.3
-  * bump compat to 9
-  * debhelper (>= 9)
-  * .gitignore modified 
-
- -- Alf Gaida <agaida@siduction.org>  Wed, 21 Mar 2012 13:25:01 +0100
-
-grub2-fll-fromiso (0.2.17) unstable; urgency=low
-
-  * added me to uploaders
-  * some changes in debian/copyright and debian/control
-
- -- Alf Gaida <agaida@siduction.org>  Sat, 24 Dec 2011 19:30:19 +0100
-
-grub2-fll-fromiso (0.2.16) UNRELEASED; urgency=low
+grub2-fll-fromiso (0.3.12) unstable; urgency=medium
 
   [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
-  [ Ferdinand Thommes ]
-  * forked package for siduction
-  * removed all occurances of aptosid
-  * added .gitolite and /source/options
-  * adopted copyright
-  * fixed /debian/foo
+  [ Alf Gaida ]
+  * full back to upstream, only siduction- in configuration remains
 
- -- Ferdinand Thommes <devil@siduction.org>  Sun, 30 Oct 2011 10:28:44 +0100
+ -- Alf Gaida <agaida@siduction.org>  Sat, 25 Jun 2016 19:00:59 +0200
+
+grub2-fll-fromiso (0.3.11) unstable; urgency=medium
+
+  * query file names for kernel/ initrd via RockRidge, before falling
+    back to plain ISO9660.
+  * convert to machine readable copyright.
+  * update mail addresses.
+  * bump standards version to 3.9.6, no changes necessary.
+  * add explicit license header to grub2-fll-portable-efi.
+  * use normal indentation levels for grub2-fll-portable-efi.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 02 Jan 2015 18:44:29 +0100
+
+grub2-fll-fromiso (0.3.10) unstable; urgency=medium
+
+  * fix d/control syntax for Uploaders.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 01 Sep 2014 22:45:04 +0200
+
+grub2-fll-fromiso (0.3.9) unstable; urgency=medium
+
+  * add grub-efi-ia32 to options for depends
+  * add initial new grub2-fll-portable-efi binary package
+
+ -- Niall Walsh <niallwalsh@celtux.org>  Mon, 01 Sep 2014 15:15:39 +0100
+
+grub2-fll-fromiso (0.3.8) unstable; urgency=medium
+
+  * supply systemd.show_status=1 by default.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 30 Jun 2014 04:22:08 +0200
+
+grub2-fll-fromiso (0.3.7) unstable; urgency=low
+
+  * bump standards version to 3.9.5, no changes necessary.
+  * debian/control: switch Vcs tags to github.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 13 Apr 2014 22:50:13 +0200
+
+grub2-fll-fromiso (0.3.6) unstable; urgency=low
+
+  * slightly tune parser performance.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 17 Apr 2013 01:35:32 +0200
+
+grub2-fll-fromiso (0.3.5) unstable; urgency=low
+
+  * update FSF postal address to be URLs.
+  * bump standards version to 3.9.4, no changes necessary.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 12 Jan 2013 03:02:06 +0100
+
+grub2-fll-fromiso (0.3.4) unstable; urgency=low
+
+  * optimise head crash, thanks to bfree.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 06 Jun 2012 04:01:16 +0200
+
+grub2-fll-fromiso (0.3.3) unstable; urgency=medium
+
+  * cope with the revision number of ISO9660 (compared to udf) ISOs as
+    displayed by isoinfo.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 06 Jun 2012 03:55:46 +0200
+
+grub2-fll-fromiso (0.3.2) unstable; urgency=low
+
+  * fix path generation for bind mounts under FLL_GRUB2_ISO_LOCATION.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 06 Jun 2012 03:29:58 +0200
+
+grub2-fll-fromiso (0.3.1) unstable; urgency=low
+
+  * bump standards version to 3.9.3, no changes necessary.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 23 Feb 2012 16:38:52 +0100
+
+grub2-fll-fromiso (0.3.0) unstable; urgency=low
+
+  * switch from vol_id/ udev compatibility mode to native blkid invocations,
+    as these are deprecated in util-linux >= 2.21.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 19 Jan 2012 14:04:02 +0100
+
+grub2-fll-fromiso (0.2.16) unstable; urgency=low
+
+  * switch to compat level 9.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 16 Jan 2012 01:34:12 +0100
 
 grub2-fll-fromiso (0.2.15) unstable; urgency=low
 
   * changed dependencies to include the grub-efi variants.
 
- -- Joaquim Boura <x-un-i@berlios.de>  Sat, 03 Sep 2011 15:46:40 +0200
+ -- Joaquim Boura <x-un-i@sapo.pt>  Sat, 03 Sep 2011 15:46:40 +0200
 
 grub2-fll-fromiso (0.2.14) unstable; urgency=low
 
@@ -79,13 +109,13 @@ grub2-fll-fromiso (0.2.14) unstable; urgency=low
   * numerically sort the isos
   * fix a couple of comment typos
 
- -- Niall Walsh <niallwalsh@users.berlios.de>  Tue, 05 Jul 2011 17:35:10 +0100
+ -- Niall Walsh <niallwalsh@celtux.org>  Tue, 05 Jul 2011 17:35:10 +0100
 
 grub2-fll-fromiso (0.2.13) unstable; urgency=low
 
   * fixed typo when setting timezone cheat. (thks latino for noticing)
 
- -- Joaquim Boura <x-un-i@berlios.de>  Fri, 27 May 2011 19:16:00 +0200
+ -- Joaquim Boura <x-un-i@sapo.pt>  Fri, 27 May 2011 19:16:00 +0200
 
 grub2-fll-fromiso (0.2.12) unstable; urgency=low
 
@@ -152,7 +182,7 @@ grub2-fll-fromiso (0.2.3) unstable; urgency=low
   * adding the module iso9660  makes fromiso also starting when the base HD
     is an USB device.
 
- -- Joaquim Boura <x-un-i@berlios.de>  Sun, 10 Jan 2010 12:13:58 +0100
+ -- Joaquim Boura <x-un-i@sapo.pt>  Sun, 10 Jan 2010 12:13:58 +0100
 
 grub2-fll-fromiso (0.2.2) unstable; urgency=low
 
@@ -213,4 +243,4 @@ grub2-fll-fromiso (0.0.1) unstable; urgency=low
   * remove dev defaults
   * added myself to the copyrights holder
 
- -- Joaquim Boura <x-un-i@berlios.de>  Fri, 27 Nov 2009 23:26:36 +0100
+ -- Joaquim Boura <x-un-i@sapo.pt>  Fri, 27 Nov 2009 23:26:36 +0100

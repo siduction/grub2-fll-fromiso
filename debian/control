@@ -1,16 +1,18 @@
 Source: grub2-fll-fromiso
 Section: admin
 Priority: extra
-Maintainer: Alf Gaida <agaida@siduction.org>
-Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Maintainer: Stefan Lippers-Hollmann <s.l-h@gmx.de>
+Uploaders: Joaquim Boura <x-un-i@sapo.pt>,
+ Niall Walsh <niallwalsh@celtux.org>,
+ Alf Gaida <agaida@siduction.org>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
 Vcs-Git: git://git.siduction.org:code/grub2-fll-fromiso.git
 Vcs-Browser: http://git.siduction.org/?p=code/grub2-fll-fromiso.git
 
 Package: grub2-fll-fromiso
 Architecture: all
-Depends: 
- ${misc:Depends},
+Depends: ${misc:Depends},
  genisoimage,
  grub-pc | grub-efi-amd64 | grub-efi-ia32
 Description: update-grub (grub2) plugin for fullstory fromiso
@@ -21,8 +23,7 @@ Description: update-grub (grub2) plugin for fullstory fromiso
 
 Package: grub2-fll-portable-efi
 Architecture: all
-Depends:
- ${misc:Depends},
+Depends: ${misc:Depends},
  grub-efi-amd64-bin | grub-efi-ia32-bin
 Description: update-grub (grub2) plugin to create portable efi
  Adds an /etc/grub.d snippet to generate portable .efi bootladers from the

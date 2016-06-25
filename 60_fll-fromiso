@@ -2,10 +2,10 @@
 
 # grub-mkconfig helper script.
 #
-# Copyright 2009      Joaquim Boura <x-un-i@berlios.de>
-# Copyright 2009-2014 Stefan Lippers-Hollmann <s.l-h@gmx.de>
-#           2011      Ferdinand Thommes <devil@siduction.org>
-#           2011-2014 Alf Gaida <agaida@siduction.org>
+# Copyright © 2009 Joaquim Boura <x-un-i@sapo.pt>
+# Copyright © 2009-2015 Stefan Lippers-Hollmann <s.l-h@gmx.de>
+# Copyright © 2011-2015 Niall Walsh <niallwalsh@celtux.org>
+#             2011-2016 Alf Gaida <agaida@siduction.org>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ libdir=${exec_prefix}/lib
 
 # override tool behaviour through /etc/default/grub2-fll-fromiso
 if [ -r /etc/default/grub2-fll-fromiso ]; then
-    . /etc/default/grub2-fll-fromiso
+	. /etc/default/grub2-fll-fromiso 
 fi
 
 FLL_GRUB2_ISO_LOCATION="${FLL_GRUB2_ISO_LOCATION:-"/srv/ISO"}"
@@ -38,21 +38,21 @@ FLL_GRUB2_CHEATCODE="${FLL_GRUB2_CHEATCODE:-"quiet systemd.show_status=1 noeject
 # we need isoinfo, bail out if it's not available
 ISOINFO="$(which isoinfo)"
 if [ -z "${ISOINFO}" ]; then
-    exit 1
+	exit 1
 fi
 
 # find ISO
 for location in $FLL_GRUB2_ISO_LOCATION; do
-    if [ -d "${location}" ]; then
-        for prefix in $FLL_GRUB2_ISO_PREFIX; do
-            FROMISO="${FROMISO} $(find ${location} -maxdepth 1 -name ${prefix}\*.iso | sort -n)"
-        done
-    fi
+	if [ -d "${location}" ]; then
+		for prefix in $FLL_GRUB2_ISO_PREFIX; do
+			FROMISO="${FROMISO} $(find ${location} -maxdepth 1 -name ${prefix}\*.iso | sort -n)"
+		done
+	fi
 done
 
 # no iso found, quit
 if [ -z "${FROMISO}" ]; then
-    exit 0
+	exit 0
 fi
 
 # assemble cmdline
@@ -63,45 +63,47 @@ DEVICE_MAP_TMP=$(mktemp)
 grub-mkdevicemap -m "${DEVICE_MAP_TMP}"
 
 for iso_image in $FROMISO; do
-    cur_device="$(grub-probe --device-map=${DEVICE_MAP_TMP} --target=device ${iso_image})"
-    if [ "$(grub-probe -t abstraction --device ${cur_device} | sed -e 's,.*\(lvm\).*,\1,')" = "lvm" ]; then
-        cur_fromhd="${cur_device}"
-    else
-        cur_fromhd="$(grub-probe --device-map=${DEVICE_MAP_TMP} --target=fs_uuid ${iso_image})"
-        cur_fromhd_fs="$(/sbin/blkid -s TYPE -o value ${cur_device})"
+	cur_device="$(grub-probe --device-map=${DEVICE_MAP_TMP} --target=device ${iso_image})"
+	if [ "$(grub-probe -t abstraction --device ${cur_device} | sed -e 's,.*\(lvm\).*,\1,')" = "lvm" ]; then
+		cur_fromhd="${cur_device}"
+	else
+		cur_fromhd="$(grub-probe --device-map=${DEVICE_MAP_TMP} --target=fs_uuid ${iso_image})"
+		cur_fromhd_fs="$(/sbin/blkid -s TYPE -o value ${cur_device})"
 
-        if [ "x${cur_fromhd_fs}" = "xmsdos" ] || [ "x${cur_fromhd_fs}" = "xntfs" ] || [ "x${cur_fromhd_fs}" = "xvfat" ]; then
-            cur_fromhd="/dev/disk/by-uuid/$(/sbin/blkid -o value -s UUID ${cur_device})"
-        else
-            cur_fromhd="UUID=${cur_fromhd}"
-        fi
-    fi
+		if [ "x${cur_fromhd_fs}" = "xmsdos" ] || [ "x${cur_fromhd_fs}" = "xntfs" ] || [ "x${cur_fromhd_fs}" = "xvfat" ]; then
+			cur_fromhd="/dev/disk/by-uuid/$(/sbin/blkid -o value -s UUID ${cur_device})"
+		else
+			cur_fromhd="UUID=${cur_fromhd}"
+		fi
+	fi
 
-    mountpoint="$(awk -v var="$cur_device" '{if ($1 == var){print $2 ; exit}}' /proc/mounts)"
-    stripped_path="${iso_image##$mountpoint}"
+	mountpoint="$(awk -v var="$cur_device" '{if ($1 == var){print $2 ; exit}}' /proc/mounts)"
+	stripped_path="${iso_image##$mountpoint}"
 
-    if [ "${mountpoint}" = "/"  ]; then
-        stripped_path="/${stripped_path}"
-    fi
 
-    kernels="$( ( ${ISOINFO} -J -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -f -i ${iso_image} ) | sed -n -e 's|\;[0-9]*$||' -e 'y|ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz|' -e 's|/boot/\(vmlinuz.*\)|\1|p')"
-    if ( ${ISOINFO} -J -l -i ${iso_image} 2> /dev/null|| ${ISOINFO} -l -i ${iso_image}) | tr A-Z a-z | grep -q initrd\\.img; then
-        initrd_suffix=".img"
-    fi
+	if [ "${mountpoint}" = "/"  ]; then
+		stripped_path="/${stripped_path}"
+	fi
 
-    for kernel in ${kernels}; do
-        printf "menuentry \"$(basename ${iso_image} .iso) (${kernel#vmlinuz\-})\" {\n"
-        printf "\tinsmod iso9660\n"
-        prepare_boot_cache="$(prepare_grub_to_access_device ${cur_device} | sed -e "s/^/\t/")"
-        printf '%s\n' "${prepare_boot_cache}"
-cat << EOF
-loopback loop ${stripped_path}
-linux (loop)/boot/${kernel} fromhd=${cur_fromhd} fromiso=${stripped_path} $CMDLINE
-initrd (loop)/boot/initrd${initrd_suffix}${kernel#vmlinuz}
+	kernels="$( ( ${ISOINFO} -J -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -R -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -f -i ${iso_image} ) | sed -n -e 's|\;[0-9]*$||' -e 'y|ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz|' -e 's|/boot/\(vmlinuz.*\)|\1|p')"
+	if ( ${ISOINFO} -J -l -i ${iso_image} 2> /dev/null || ${ISOINFO} -R -l -i ${iso_image} 2>/dev/null || ${ISOINFO} -l -i ${iso_image}) | tr A-Z a-z | grep -q initrd\\.img; then
+		initrd_suffix=".img"
+	fi
+
+	for kernel in ${kernels}; do
+		printf "menuentry \"$(basename ${iso_image} .iso) (${kernel#vmlinuz\-})\" {\n"
+		printf "\tinsmod iso9660\n"
+		prepare_boot_cache="$(prepare_grub_to_access_device ${cur_device} | sed -e "s/^/\t/")"
+		printf '%s\n' "${prepare_boot_cache}"
+
+		cat << EOF
+	loopback loop ${stripped_path}
+	linux (loop)/boot/${kernel} fromhd=${cur_fromhd} fromiso=${stripped_path} $CMDLINE
+	initrd (loop)/boot/initrd${initrd_suffix}${kernel#vmlinuz}
 }
 EOF
-       echo "Found fromiso: $(basename ${iso_image}) on ${cur_device}" >&2
-    done
+	echo "Found fromiso: $(basename ${iso_image}) on ${cur_device}" >&2
+	done
 done
 
 rm -f "${DEVICE_MAP_TMP}"
