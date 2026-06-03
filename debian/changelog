@@ -1,3 +1,9 @@
+grub2-fll-fromiso (0.3.13) unstable; urgency=medium
+
+  * add mx-patch from https://github.com/siduction/grub2-fll-fromiso/issues/1
+
+ -- Torsten Wohlfarth <towo@siduction.org>  Wed, 03 Jun 2026 14:17:42 +0200
+
 grub2-fll-fromiso (0.3.12) unstable; urgency=medium
 
   [ Stefan Lippers-Hollmann ]
