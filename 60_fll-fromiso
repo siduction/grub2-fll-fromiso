@@ -84,7 +84,23 @@ for iso_image in $FROMISO; do
 	if [ "${mountpoint}" = "/"  ]; then
 		stripped_path="/${stripped_path}"
 	fi
-
+        loopback="$( ( ${ISOINFO} -J -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -R -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -f -i ${iso_image} ) | sed -n -e 's|\;[0-9]*$||' -e 'y|ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz|' -e 's|\(/boot/grub/loopback.cfg\)|\1|p')"
+        if [ -n "$loopback" ]; then
+		iso_label="$(basename "${iso_image}")"
+		uuid_fromhd=$(echo $cur_fromhd|sed -e 's/UUID=//')
+        	echo menuentry \"Native Loopback Menu, $iso_label\" {
+        	echo '\t' set iso_path=\"$stripped_path fromhd=$cur_fromhd\"
+        	echo '\t' export iso_path
+        	echo '\t' search --no-floppy --fs-uuid --set=root $uuid_fromhd
+        	echo '\t' insmod probe
+        	echo '\t' probe -u '$root' --set=buuid
+        	echo '\t' export buuid
+        	echo '\t' loopback loop $stripped_path
+        	echo '\t' set root=loop
+        	echo '\t' sleep 5
+        	echo '\t' configfile /boot/grub/loopback.cfg
+        	echo }
+        else
 	kernels="$( ( ${ISOINFO} -J -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -R -f -i ${iso_image} 2>/dev/null || ${ISOINFO} -f -i ${iso_image} ) | sed -n -e 's|\;[0-9]*$||' -e 'y|ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz|' -e 's|/boot/\(vmlinuz.*\)|\1|p')"
 	if ( ${ISOINFO} -J -l -i ${iso_image} 2> /dev/null || ${ISOINFO} -R -l -i ${iso_image} 2>/dev/null || ${ISOINFO} -l -i ${iso_image}) | tr A-Z a-z | grep -q initrd\\.img; then
 		initrd_suffix=".img"
@@ -104,6 +120,7 @@ for iso_image in $FROMISO; do
 EOF
 	echo "Found fromiso: $(basename ${iso_image}) on ${cur_device}" >&2
 	done
+        fi
 done
 
 rm -f "${DEVICE_MAP_TMP}"
