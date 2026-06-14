@@ -88,16 +88,16 @@ for iso_image in $FROMISO; do
         if [ -n "$loopback" ]; then
 		iso_label="$(basename "${iso_image}")"
 		uuid_fromhd=$(echo $cur_fromhd|sed -e 's/UUID=//')
+        	echo Found Loopback ISO: $iso_label >&2
         	echo menuentry \"Native Loopback Menu, $iso_label\" {
-        	echo '\t' set iso_path=\"$stripped_path fromhd=$cur_fromhd\"
+        	echo '\t' set iso_path=\"$stripped_path\"
         	echo '\t' export iso_path
+        	echo '\t' set kopts=\"fromhd=$cur_fromhd\"
+        	echo '\t' export kopts
         	echo '\t' search --no-floppy --fs-uuid --set=root $uuid_fromhd
-        	echo '\t' insmod probe
-        	echo '\t' probe -u '$root' --set=buuid
-        	echo '\t' export buuid
         	echo '\t' loopback loop $stripped_path
         	echo '\t' set root=loop
-        	echo '\t' sleep 5
+        	echo '\t' sleep 3
         	echo '\t' configfile /boot/grub/loopback.cfg
         	echo }
         else
